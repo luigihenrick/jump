@@ -5,7 +5,7 @@
 }
 
 .game-board {
-    width: 800px;
+    max-width: 800px;
     height: 600px;
     border: 1px solid black;
     margin: 0 auto;
@@ -14,7 +14,15 @@
     background-image: url("../images/background.jpg");
     background-position: bottom;
     background-size: cover;
-    animation: background-animation 1.8s linear infinite;
+    animation: background-animation 1.615s linear infinite;
+}
+
+.game-over {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    margin: auto;
+    display: none;
 }
 
 .jump {
@@ -49,7 +57,7 @@
         right: -80px;
     }
     to {
-        right: 100%;
+        right: 100vh;
     }
 }
 
