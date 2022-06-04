@@ -5,7 +5,7 @@ const gameoverImage = document.querySelector('.game-over');
 const jumpTimeout = 750;
 let gameover = false;
 
-let game = setInterval(() => loop(), 10);
+let gameLoop = setInterval(() => loop(), 10);
 let endGameAnimation;
 
 let loop = () => {
@@ -19,13 +19,11 @@ let loop = () => {
     if (pipePosition >= 0 && pipePosition <= 120 && luigiPosition < 162) {
         endgame(pipePosition, backgroundPosition, luigiPosition);
     }
-
 };
 
 
 const restart = () => {
     gameover = false;
-    game = setInterval(() => loop(), 10);
 
     gameBoard.style.animation = 'background-animation 1.8s linear infinite';
     gameBoard.style.backgroundPosition = 'bottom';
@@ -41,6 +39,7 @@ const restart = () => {
 
     gameoverImage.style.display = 'none';
     clearInterval(endGameAnimation);
+    gameLoop = setInterval(() => loop(), 10);
 };
 
 const endgame = (pipePosition, backgroundPosition, luigiPosition) => {
@@ -62,7 +61,7 @@ const endgame = (pipePosition, backgroundPosition, luigiPosition) => {
 
     gameoverImage.style.display = 'block';
     
-    clearInterval(game);
+    clearInterval(gameLoop);
 };
 
 const jump = () => {
@@ -84,5 +83,5 @@ const jump = () => {
 };
 
 document.addEventListener('keydown', jump);
-document.addEventListener('touchstart', jump);
-document.addEventListener("click", jump);
+document.addEventListener('touchstart', (e) => { jump(); e.preventDefault(); });
+document.addEventListener('click', (e) => { jump(); e.preventDefault(); });
