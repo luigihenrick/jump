@@ -93,5 +93,4 @@ const jump = () => {
 };
 
 document.addEventListener('keydown', jump);
-document.addEventListener('touchstart', (e) => { jump(); e.preventDefault(); });
-document.addEventListener('click', (e) => { jump(); e.preventDefault(); });
+document.addEventListener('click', jump);
