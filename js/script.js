@@ -2,25 +2,31 @@ const luigi = document.querySelector('.luigi');
 const pipe = document.querySelector('.pipe');
 const gameBoard = document.querySelector('.game-board');
 const gameoverImage = document.querySelector('.game-over');
+const score = document.querySelector('.score');
 const jumpTimeout = 750;
 let gameover = false;
-
-let gameLoop = setInterval(() => loop(), 10);
 let endGameAnimation;
 
-let loop = () => {
+let gameLoop = setInterval(() => loop(), 10);
+let scoreLoop = setInterval(() => calcScore(), 100);
 
+const loop = () => {
     const pipePosition = pipe.offsetLeft;
     const backgroundPosition = window.getComputedStyle(gameBoard).backgroundPositionX;
     const luigiPosition = +window.getComputedStyle(luigi).bottom.replace('px', '');
-
-    // console.log(`luigi: ${luigiPosition} pipe: ${pipePosition}` );
 
     if (pipePosition >= 0 && pipePosition <= 120 && luigiPosition < 162) {
         endgame(pipePosition, backgroundPosition, luigiPosition);
     }
 };
 
+const calcScore = () => {
+    score.innerHTML = Number(score.innerHTML) + 10;
+};
+
+const resetScore = () => {
+    score.innerHTML = Number(0);
+};
 
 const restart = () => {
     gameover = false;
@@ -39,7 +45,10 @@ const restart = () => {
 
     gameoverImage.style.display = 'none';
     clearInterval(endGameAnimation);
+
+    resetScore();
     gameLoop = setInterval(() => loop(), 10);
+    scoreLoop = setInterval(() => calcScore(), 100)
 };
 
 const endgame = (pipePosition, backgroundPosition, luigiPosition) => {
@@ -62,6 +71,7 @@ const endgame = (pipePosition, backgroundPosition, luigiPosition) => {
     gameoverImage.style.display = 'block';
     
     clearInterval(gameLoop);
+    clearInterval(scoreLoop);
 };
 
 const jump = () => {

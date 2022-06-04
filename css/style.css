@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: SuperMario;
 }
 
 .game-board {
@@ -14,7 +15,21 @@
     background-image: url("../images/background.jpg");
     background-position: bottom;
     background-size: cover;
-    animation: background-animation 1.615s linear infinite;
+    animation: background-animation 2s linear infinite;
+}
+
+.score {
+    position: absolute;
+    margin-left: 90px;
+    margin-top: 2px;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.score-img {
+    position: absolute;
+    width: 80px;
 }
 
 .game-over {
@@ -33,7 +48,7 @@
     position: absolute;
     bottom: 60px;
     width: 80px;
-    animation: pipe-animation 2s linear infinite;
+    animation: pipe-animation 2.2s linear infinite;
 }
 
 .luigi {
@@ -43,12 +58,17 @@
     left: 60px;
 }
 
+@font-face {
+    font-family: SuperMario;
+    src: url('../fonts/SuperMario256.ttf')
+}
+
 @keyframes background-animation {
     from {
-        background-position: 0;
+        background-position: 798px;
     }
     to {
-        background-position: -798px;
+        background-position: 0px;
     }
 }
 
@@ -57,24 +77,16 @@
         right: -80px;
     }
     to {
-        right: 100vh;
+        right: 94vh;
     }
 }
 
 @keyframes jump {
-    0% {
+    from, to {
         bottom: 60px;
     }   
 
-    40% {
+    40%, 60% {
         bottom: 240px;
-    }
-
-    60% {
-        bottom: 240px;
-    }
-
-    100% {
-        bottom: 60px;
     }
 }
